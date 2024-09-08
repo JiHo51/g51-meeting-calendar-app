@@ -12,7 +12,7 @@ public class CalendarDBConnection {
     private static final String DB_NAME = "g51_meeting_calendar_db";
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/" + DB_NAME;    // Address to DB
     private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "ji83#sql45&ser%ver";
+    private static final String JDBC_PASSWORD = "*******";                              // Pw deleted
 
 // --- Methods ---
     // Static Method 'getConnection':   // Static method - data stored in memory allocated for class
