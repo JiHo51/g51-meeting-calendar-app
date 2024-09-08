@@ -32,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
             ) {
             User user = new User(username);
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(2, user.getHashedPassword());
             int affectedRows = preparedStatement.executeUpdate();
             if(affectedRows == 0) {
                 throw new MySQLException("Creating user failed, no rows affected.");

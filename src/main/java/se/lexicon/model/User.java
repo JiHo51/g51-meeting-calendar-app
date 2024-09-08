@@ -1,5 +1,8 @@
 package se.lexicon.model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import se.lexicon.exception.AuthenticationFailedException;
+
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -49,8 +52,23 @@ public class User {
         return expired;
     } // Getter Method 'isExpired' end --
 
+    // Getter 'getHashedPassword':                 // Hashing the password
+    public String getHashedPassword() {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        return passwordEncoder.encode(this.password);
+    } // Getter Method 'getHashedPassword' end --
+
 
 // --- Methods ---
+    // Method 'checkHash':                        // Compare the raw and hashed password
+    public void checkHash(String hashedPassword) throws AuthenticationFailedException {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        boolean isEqual = passwordEncoder.matches(this.password, hashedPassword);
+        if(!isEqual) {
+            throw new AuthenticationFailedException("Authentication failed. Invalid credentials.");
+        }
+    } // Method 'checkHash' end --
+
     // Method 'userInfo':
     public String userInfo() {
     return "Username: " + username + ", Password: " + password;
